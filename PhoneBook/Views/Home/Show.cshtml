@@ -1,0 +1,96 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Models.ViewModels.Contact;
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        table {
+            border-collapse: collapse;
+            font-family: 'B Nazanin';
+            direction:rtl;
+        }
+
+            table td {
+                padding: 15px;
+            }
+
+            table thead td {
+                background-color: #54585d;
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 13px;
+                border: 1px solid #54585d;
+            }
+
+            table tbody td {
+                color: #636363;
+                border: 1px solid #dddfe1;
+            }
+
+            table tbody tr {
+                background-color: #f9fafb;
+            }
+
+                table tbody tr:nth-child(odd) {
+                    background-color: #ffffff;
+                }
+
+                body{
+                   font-family:'B Nazanin';
+                    direction:rtl;
+                }
+
+    </style>
+</head>
+
+
+
+
+<body  >
+    
+    
+    <table >
+        <tr>
+            <td>
+                نام
+            </td>
+            <td>
+                نام خانوادگی
+            </td>
+            <td>
+                کد ملی
+            </td>
+            <td>
+                شماره تماس
+            </td>
+        </tr>
+        @foreach (var item in (IEnumerable<Models.ViewModels.Contact>)ViewData["Model"])
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NationalID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit","Edit","PhoneBooks",new {Id=item.UserId,PhoneId=item.Id})
+        </td>
+    </tr>
+
+        }
+
+
+    </table>
+</body>
+</html>
