@@ -102,7 +102,7 @@ namespace PhoneBook_.Controllers
         public IActionResult FinalEdit(Models.ViewModels.Contact Contact)
         {
             Models.User User = new Models.User { Id = Contact.UserId, Fname = Contact.Fname, Lname = Contact.Lname, NationalID = Contact.NationalID, User_PhoneBooks = null };
-            Models.PhoneBook phoneBook = new Models.PhoneBook { Id = Contact.Id, PhoneNo = Contact.PhoneNo, UserId = Contact.UserId,User= Contact.User };
+            Models.PhoneBook phoneBook = new Models.PhoneBook { Id = Contact.Id, PhoneNo = Contact.PhoneNo, UserId = Contact.UserId };
 
 
             _unitOfWork.UserRepository.Update(User);

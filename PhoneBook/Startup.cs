@@ -14,7 +14,8 @@ namespace PhoneBook
 {
     public class Startup
     {
-
+        public const string ADMINCORSPOLICY = "_Admin_Cors_Policy";
+        public const string OTHERSCORSPOLICY = "_Admin_Cors_Policy";
         public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +31,33 @@ namespace PhoneBook
 
             services.AddControllersWithViews();
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: ADMINCORSPOLICY,
+
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:16830")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                    });
+
+                options.AddPolicy(name: OTHERSCORSPOLICY,
+
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                    });
+
+
+            });
+
+
+
+
+
 
             services.AddDbContext<Data.DataBaseContext>(options => options
             .UseSqlServer(Configuration.GetConnectionString("MyConnectionStrings")));
@@ -70,9 +98,9 @@ namespace PhoneBook
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name:"default",
-                    pattern:"{controller=home}/{action=index}/{Id?}"
-                    
+                    name: "default",
+                    pattern: "{controller=home}/{action=index}/{Id?}"
+
                     );
             });
         }
